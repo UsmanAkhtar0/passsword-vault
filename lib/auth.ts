@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-if (!JWT_SECRET) throw new Error("JWT_SECRET missing");
+const secret = process.env.JWT_SECRET;
+if (!secret) throw new Error("JWT_SECRET missing");
+const JWT_SECRET: string = secret as string;
 
 export type SessionToken = {
   uid: string; // userId as hex
@@ -10,8 +11,14 @@ export type SessionToken = {
 };
 
 export function signSession(uid: ObjectId): string {
-  const payload: SessionToken = { uid: uid.toHexString(), iat: Math.floor(Date.now() / 1000) };
-  return jwt.sign(payload, JWT_SECRET, { algorithm: "HS256", expiresIn: "7d" });
+  const payload: SessionToken = {
+    uid: uid.toHexString(),
+    iat: Math.floor(Date.now() / 1000),
+  };
+  return jwt.sign(payload, JWT_SECRET, {
+    algorithm: "HS256",
+    expiresIn: "7d",
+  });
 }
 
 export function verifySession(token: string): SessionToken | null {
