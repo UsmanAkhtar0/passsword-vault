@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light dark; }
+body { @apply bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100; }
+button { @apply rounded-2xl px-3 py-2 shadow-sm; }
+input, textarea, select { @apply rounded-xl border px-3 py-2 bg-white/80 dark:bg-slate-800 border-slate-300 dark:border-slate-700; }
+.card { @apply rounded-2xl p-4 shadow; }
+.btn { @apply bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900; }
+.btn-ghost { @apply bg-transparent border; }
+.link { @apply underline; }
+small.muted { @apply text-slate-500; }
